@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://dbjsm7meirmrt"]
+
+[ext_resource type="FontFile" uid="uid://bp0i4l3eieqv5" path="res://assets/fonts/conthrax-sb.ttf" id="1_1e6cx"]
+[ext_resource type="Script" path="res://scripts/xp_bar.gd" id="1_yrvgc"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rdkw4"]
+bg_color = Color(0.505882, 0.505882, 0.505882, 0.368627)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b0b5h"]
+bg_color = Color(0.219608, 0.631373, 0.901961, 1)
+corner_radius_top_left = 9
+corner_radius_top_right = 9
+corner_radius_bottom_right = 9
+corner_radius_bottom_left = 9
+
+[node name="XPBar" type="CanvasLayer"]
+script = ExtResource("1_yrvgc")
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+offset_left = 5.0
+offset_top = 3.0
+offset_right = 298.0
+offset_bottom = 30.0
+theme_override_fonts/font = ExtResource("1_1e6cx")
+theme_override_styles/background = SubResource("StyleBoxFlat_rdkw4")
+theme_override_styles/fill = SubResource("StyleBoxFlat_b0b5h")

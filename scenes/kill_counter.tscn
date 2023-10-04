@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://cx7ay48kvjrmr"]
+
+[ext_resource type="Script" path="res://scripts/kill_counter.gd" id="1_6wegf"]
+[ext_resource type="FontFile" uid="uid://bp0i4l3eieqv5" path="res://assets/fonts/conthrax-sb.ttf" id="2_7i1xq"]
+
+[node name="KillCounter" type="CanvasLayer"]
+script = ExtResource("1_6wegf")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 4.0
+offset_top = 32.0
+offset_right = 68.0
+offset_bottom = 55.0
+theme_override_fonts/font = ExtResource("2_7i1xq")
+text = "Kills: 0"

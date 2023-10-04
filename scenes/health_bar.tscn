@@ -1,0 +1,46 @@
+[gd_scene load_steps=6 format=3 uid="uid://dc7fa15nadykw"]
+
+[ext_resource type="Script" path="res://scripts/health_bar.gd" id="1_24f6n"]
+[ext_resource type="Texture2D" uid="uid://bnhbw78pj66re" path="res://assets/sprites/sheet.png" id="2_3fvvn"]
+[ext_resource type="Texture2D" uid="uid://ufcwi082a4l6" path="res://assets/sprites/uipackSpace_sheet.png" id="3_8r02o"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ixlik"]
+texture = ExtResource("2_3fvvn")
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+region_rect = Rect2(0, 117, 222, 39)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_pbcoh"]
+texture = ExtResource("3_8r02o")
+axis_stretch_horizontal = 1
+region_rect = Rect2(386, 366, 16, 26)
+
+[node name="HealthBar" type="CanvasLayer"]
+script = ExtResource("1_24f6n")
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+offset_left = 11.0
+offset_top = 597.0
+offset_right = 183.0
+offset_bottom = 634.0
+theme_override_styles/background = SubResource("StyleBoxTexture_ixlik")
+theme_override_styles/fill = SubResource("StyleBoxTexture_pbcoh")
+step = 1.0
+value = 100.0
+show_percentage = false
+
+[node name="Begin" type="Sprite2D" parent="."]
+position = Vector2(13, 615.5)
+scale = Vector2(1, 1.42308)
+texture = ExtResource("3_8r02o")
+region_enabled = true
+region_rect = Rect2(400, 104, 6, 26)
+
+[node name="End" type="Sprite2D" parent="."]
+position = Vector2(181, 615.5)
+scale = Vector2(1, 1.42308)
+texture = ExtResource("3_8r02o")
+region_enabled = true
+region_rect = Rect2(400, 26, 6, 26)

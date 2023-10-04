@@ -1,0 +1,23 @@
+[gd_resource type="AudioBusLayout" load_steps=3 format=3 uid="uid://7i8pgc5pgaym"]
+
+[sub_resource type="AudioEffectReverb" id="AudioEffectReverb_b2hlk"]
+resource_name = "Reverb"
+room_size = 0.16
+dry = 0.75
+wet = 0.15
+
+[sub_resource type="AudioEffectDistortion" id="AudioEffectDistortion_vs41y"]
+resource_name = "Distortion"
+
+[resource]
+bus/0/volume_db = -0.00162125
+bus/0/effect/0/effect = SubResource("AudioEffectReverb_b2hlk")
+bus/0/effect/0/enabled = true
+bus/1/name = &"Distort"
+bus/1/solo = false
+bus/1/mute = false
+bus/1/bypass_fx = false
+bus/1/volume_db = 0.0
+bus/1/send = &"Master"
+bus/1/effect/0/effect = SubResource("AudioEffectDistortion_vs41y")
+bus/1/effect/0/enabled = true

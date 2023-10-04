@@ -1,0 +1,48 @@
+[gd_scene load_steps=5 format=3 uid="uid://dh480ts0c7518"]
+
+[ext_resource type="Texture2D" uid="uid://donbgqe761lhl" path="res://assets/sprites/particles/asteroid_a.png" id="1_53esw"]
+[ext_resource type="Script" path="res://scripts/asteroid_particles.gd" id="1_khf8s"]
+[ext_resource type="Texture2D" uid="uid://q2y167ppr1yo" path="res://assets/sprites/particles/asteroid_b.png" id="2_uey8p"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_gq6um"]
+lifetime_randomness = 1.0
+particle_flag_disable_z = true
+direction = Vector3(0, 0, 0)
+spread = 180.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 50.0
+initial_velocity_max = 100.0
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+angle_min = -180.0
+angle_max = 180.0
+scale_min = 0.4
+collision_mode = 1
+collision_friction = 0.0
+collision_bounce = 0.55
+
+[node name="AsteroidParticlesA" type="Node2D"]
+script = ExtResource("1_khf8s")
+
+[node name="AsteroidParticlesA" type="GPUParticles2D" parent="."]
+emitting = false
+process_material = SubResource("ParticleProcessMaterial_gq6um")
+texture = ExtResource("1_53esw")
+lifetime = 3.0
+one_shot = true
+explosiveness = 1.0
+
+[node name="AsteroidParticlesB" type="GPUParticles2D" parent="."]
+emitting = false
+process_material = SubResource("ParticleProcessMaterial_gq6um")
+texture = ExtResource("2_uey8p")
+lifetime = 3.0
+one_shot = true
+explosiveness = 1.0
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

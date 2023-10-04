@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://dlqm06n6rrelv"]
+
+[ext_resource type="Texture2D" uid="uid://bnhbw78pj66re" path="res://assets/sprites/sheet.png" id="1_t2aao"]
+[ext_resource type="Script" path="res://scripts/simple_bullet_hit.gd" id="2_qv44d"]
+
+[node name="SimpleBulletHit" type="Sprite2D"]
+z_index = 1
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("1_t2aao")
+region_enabled = true
+region_rect = Rect2(596, 961, 48, 47)
+script = ExtResource("2_qv44d")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.05
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

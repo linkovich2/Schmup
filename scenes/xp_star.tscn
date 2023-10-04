@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://b7si2cm8jc8yi"]
+
+[ext_resource type="Texture2D" uid="uid://bnhbw78pj66re" path="res://assets/sprites/sheet.png" id="1_bkh1s"]
+[ext_resource type="Script" path="res://scripts/xp_star.gd" id="1_pn6y1"]
+[ext_resource type="AudioStream" uid="uid://cjchra4s6orjb" path="res://assets/sounds/sfx_zap.ogg" id="3_1ylin"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_i0hos"]
+radius = 9.0
+
+[node name="XPStar" type="Area2D"]
+z_index = 1
+script = ExtResource("1_pn6y1")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_bkh1s")
+region_enabled = true
+region_rect = Rect2(778, 557, 31, 30)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_i0hos")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_1ylin")
+volume_db = 2.0
+pitch_scale = 2.5
+attenuation = 14.9285
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -1,0 +1,120 @@
+[gd_scene load_steps=15 format=3 uid="uid://hr0qff6stih"]
+
+[ext_resource type="Script" path="res://scripts/play_screen.gd" id="1_6adp3"]
+[ext_resource type="PackedScene" uid="uid://ulkipwtqckyj" path="res://scenes/player.tscn" id="2_iuu5d"]
+[ext_resource type="Texture2D" uid="uid://bw8wbwoya2txo" path="res://assets/sprites/backgrounds/Nebula Blue.png" id="5_jb2ql"]
+[ext_resource type="Texture2D" uid="uid://brswwgmmniso3" path="res://assets/sprites/backgrounds/Stars Small_1.png" id="6_bxv0p"]
+[ext_resource type="Texture2D" uid="uid://c57cdsfuyxvdy" path="res://assets/sprites/backgrounds/Stars Small_2.png" id="7_x5h2i"]
+[ext_resource type="Texture2D" uid="uid://bq3aey8xj2ga0" path="res://assets/sprites/backgrounds/Stars-Big_1_1_PC.png" id="8_rvgso"]
+[ext_resource type="Texture2D" uid="uid://dqahq08xeut8v" path="res://assets/sprites/backgrounds/Stars-Big_1_2_PC.png" id="9_w80rr"]
+[ext_resource type="PackedScene" uid="uid://cx7ay48kvjrmr" path="res://scenes/kill_counter.tscn" id="10_44mlm"]
+[ext_resource type="PackedScene" uid="uid://dc7fa15nadykw" path="res://scenes/health_bar.tscn" id="11_6u1a4"]
+[ext_resource type="PackedScene" uid="uid://dbjsm7meirmrt" path="res://scenes/xp_bar.tscn" id="12_1midh"]
+[ext_resource type="AudioStream" uid="uid://cy0j0adwtxrtb" path="res://assets/sounds/sfx_lose.ogg" id="12_mm7ho"]
+[ext_resource type="PackedScene" uid="uid://rwic4iuur2au" path="res://scenes/spawner_manager.tscn" id="13_hggyo"]
+[ext_resource type="PackedScene" uid="uid://dyk7t7glbwdsy" path="res://scenes/game_over_screen.tscn" id="13_tohn7"]
+
+[sub_resource type="Environment" id="Environment_iu4sr"]
+background_mode = 3
+glow_enabled = true
+glow_blend_mode = 1
+
+[node name="Play" type="Node"]
+process_mode = 3
+script = ExtResource("1_6adp3")
+
+[node name="Player" parent="." instance=ExtResource("2_iuu5d")]
+process_mode = 1
+position = Vector2(577, 323)
+
+[node name="RoundTimer" type="Timer" parent="."]
+process_mode = 1
+wait_time = 600.0
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(1.5, 1.5)
+motion_mirroring = Vector2(4096, 4096)
+
+[node name="TextureRect" type="TextureRect" parent="ParallaxBackground/ParallaxLayer"]
+offset_left = -684.0
+offset_top = -491.0
+offset_right = 1574.0
+offset_bottom = 1054.0
+texture = ExtResource("5_jb2ql")
+stretch_mode = 1
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2(4096, 4096)
+
+[node name="TextureRect" type="TextureRect" parent="ParallaxBackground/ParallaxLayer2"]
+offset_left = -686.0
+offset_top = -471.0
+offset_right = 1812.0
+offset_bottom = 1306.0
+texture = ExtResource("6_bxv0p")
+stretch_mode = 1
+
+[node name="ParallaxLayer3" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.75, 0.75)
+motion_mirroring = Vector2(4096, 4096)
+
+[node name="TextureRect" type="TextureRect" parent="ParallaxBackground/ParallaxLayer3"]
+modulate = Color(1, 1, 1, 0.235294)
+offset_left = -686.0
+offset_top = -471.0
+offset_right = 1812.0
+offset_bottom = 1306.0
+texture = ExtResource("7_x5h2i")
+stretch_mode = 1
+
+[node name="ParallaxLayer4" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.5, 0.5)
+motion_mirroring = Vector2(4096, 4096)
+
+[node name="TextureRect" type="TextureRect" parent="ParallaxBackground/ParallaxLayer4"]
+modulate = Color(1, 1, 1, 0.305882)
+offset_left = -686.0
+offset_top = -471.0
+offset_right = 1812.0
+offset_bottom = 1306.0
+texture = ExtResource("8_rvgso")
+stretch_mode = 1
+
+[node name="ParallaxLayer5" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.25, 0.25)
+motion_mirroring = Vector2(4096, 4096)
+
+[node name="TextureRect" type="TextureRect" parent="ParallaxBackground/ParallaxLayer5"]
+modulate = Color(1, 1, 1, 0.301961)
+offset_left = -686.0
+offset_top = -471.0
+offset_right = 1812.0
+offset_bottom = 1306.0
+texture = ExtResource("9_w80rr")
+stretch_mode = 1
+
+[node name="KillCounter" parent="." instance=ExtResource("10_44mlm")]
+
+[node name="HealthBar" parent="." instance=ExtResource("11_6u1a4")]
+
+[node name="XPBar" parent="." instance=ExtResource("12_1midh")]
+
+[node name="GameOverSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("12_mm7ho")
+pitch_scale = 1.1
+
+[node name="GameOverScreen" parent="." instance=ExtResource("13_tohn7")]
+visible = false
+
+[node name="GameOverTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="SpawnerManager" parent="." instance=ExtResource("13_hggyo")]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_iu4sr")
+
+[connection signal="timeout" from="RoundTimer" to="." method="_on_round_timer_timeout"]
+[connection signal="timeout" from="GameOverTimer" to="." method="_on_game_over_timer_timeout"]

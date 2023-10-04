@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=3 uid="uid://dyk7t7glbwdsy"]
+
+[ext_resource type="FontFile" uid="uid://bp0i4l3eieqv5" path="res://assets/fonts/conthrax-sb.ttf" id="1_b30ym"]
+[ext_resource type="Texture2D" uid="uid://ufcwi082a4l6" path="res://assets/sprites/uipackSpace_sheet.png" id="1_cq0ew"]
+[ext_resource type="Script" path="res://scenes/game_over_screen.gd" id="1_r5ila"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_xwqar"]
+texture = ExtResource("1_cq0ew")
+region_rect = Rect2(0, 200, 100, 100)
+
+[sub_resource type="LabelSettings" id="LabelSettings_28uys"]
+font = ExtResource("1_b30ym")
+font_size = 22
+
+[node name="GameOverScreen" type="CanvasLayer"]
+process_mode = 3
+script = ExtResource("1_r5ila")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 415.0
+offset_top = 155.0
+offset_right = 732.0
+offset_bottom = 477.0
+theme_override_styles/normal = SubResource("StyleBoxTexture_xwqar")
+text = "
+Shot Down!"
+label_settings = SubResource("LabelSettings_28uys")
+horizontal_alignment = 1
+uppercase = true
+
+[node name="Button" type="Button" parent="."]
+offset_left = 526.0
+offset_top = 388.0
+offset_right = 618.0
+offset_bottom = 419.0
+text = "Continue >"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

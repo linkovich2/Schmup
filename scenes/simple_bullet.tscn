@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://c3qngqdl1jtuh"]
+
+[ext_resource type="Script" path="res://scripts/simple_bullet.gd" id="1_nrb3r"]
+[ext_resource type="Texture2D" uid="uid://bnhbw78pj66re" path="res://assets/sprites/sheet.png" id="2_drh5l"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_eq5uv"]
+radius = 2.0
+height = 10.0
+
+[node name="SimpleBullet" type="Area2D"]
+script = ExtResource("1_nrb3r")
+
+[node name="Bullet" type="Sprite2D" parent="."]
+rotation = 1.5708
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_drh5l")
+region_enabled = true
+region_rect = Rect2(858, 475, 9, 37)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(4, 0)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_eq5uv")
+
+[node name="OffscreenTimer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="OffscreenTimer" to="." method="_on_timer_timeout"]

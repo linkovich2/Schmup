@@ -1,0 +1,137 @@
+[gd_scene load_steps=14 format=3 uid="uid://ulkipwtqckyj"]
+
+[ext_resource type="Script" path="res://scripts/player.gd" id="1_l60fy"]
+[ext_resource type="Shader" path="res://shaders/flash.gdshader" id="1_p40lr"]
+[ext_resource type="Texture2D" uid="uid://bnhbw78pj66re" path="res://assets/sprites/sheet.png" id="2_ebag4"]
+[ext_resource type="AudioStream" uid="uid://7nxume8v7isx" path="res://assets/sounds/weapons/HandGun/scifi2_handgun_single_01.wav" id="3_kjj4f"]
+[ext_resource type="AudioStream" uid="uid://xmdxb4o22844" path="res://assets/sounds/boost.wav" id="4_015oj"]
+[ext_resource type="Shader" path="res://shaders/color_filter.gdshader" id="4_y23lo"]
+[ext_resource type="AudioStream" uid="uid://d2afghn6ahqtl" path="res://assets/sounds/engine_hum.wav" id="5_vy3cu"]
+[ext_resource type="AudioStream" uid="uid://c6g1gwt5ajb8v" path="res://assets/sounds/impact/impactPlate_medium_004.ogg" id="8_ga2kk"]
+[ext_resource type="AudioStream" uid="uid://cy0j0adwtxrtb" path="res://assets/sounds/sfx_lose.ogg" id="9_v5wv1"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_a45y0"]
+resource_local_to_scene = true
+shader = ExtResource("1_p40lr")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/flashState = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fuqei"]
+resource_local_to_scene = true
+shader = ExtResource("4_y23lo")
+shader_parameter/color1 = Color(0.996078, 0.996078, 0.996078, 1)
+shader_parameter/color2 = Color(0.964706, 0.964706, 0.964706, 1)
+shader_parameter/color3 = Color(0.85098, 0.85098, 0.85098, 1)
+shader_parameter/precision = 0.1
+
+[sub_resource type="Animation" id="Animation_e3480"]
+resource_name = "fade_in_and_out"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.1, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ukd7h"]
+_data = {
+"fade_in_and_out": SubResource("Animation_e3480")
+}
+
+[node name="Player" type="CharacterBody2D" groups=["player"]]
+motion_mode = 1
+script = ExtResource("1_l60fy")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_a45y0")
+position = Vector2(-1.38092e-11, 3.8147e-06)
+rotation = 1.5708
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_ebag4")
+region_enabled = true
+region_rect = Rect2(111, 791, 113, 75)
+
+[node name="Damage_1" type="Sprite2D" parent="Sprite2D"]
+visible = false
+material = SubResource("ShaderMaterial_fuqei")
+texture = ExtResource("2_ebag4")
+region_enabled = true
+region_rect = Rect2(0, 866, 111, 75)
+
+[node name="Damage_2" type="Sprite2D" parent="Sprite2D"]
+visible = false
+material = SubResource("ShaderMaterial_fuqei")
+texture = ExtResource("2_ebag4")
+region_enabled = true
+region_rect = Rect2(0, 791, 111, 75)
+
+[node name="Damage_3" type="Sprite2D" parent="Sprite2D"]
+visible = false
+material = SubResource("ShaderMaterial_fuqei")
+texture = ExtResource("2_ebag4")
+region_enabled = true
+region_rect = Rect2(0, 716, 111, 75)
+
+[node name="Booster" type="Sprite2D" parent="Sprite2D"]
+position = Vector2(0.00013717, 40)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_ebag4")
+region_enabled = true
+region_rect = Rect2(224, 907, 38, 23)
+
+[node name="Boost" type="Sprite2D" parent="Sprite2D/Booster"]
+modulate = Color(1, 1, 1, 0)
+position = Vector2(1.9233e-06, 44)
+scale = Vector2(2, 2)
+texture = ExtResource("2_ebag4")
+region_enabled = true
+region_rect = Rect2(835, 362, 13, 33)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D/Booster/Boost"]
+autoplay = "fade_in_and_out"
+libraries = {
+"": SubResource("AnimationLibrary_ukd7h")
+}
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+visible = false
+polygon = PackedVector2Array(-17, -18, -3, -26, 7, -6, 19, 0, 7, 7, -2, 28, -16, 20, -14, 9, -19, 6, -19, -6, -15, -8)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(0.8, 0.8)
+position_smoothing_enabled = true
+position_smoothing_speed = 1.0
+
+[node name="ShotCooldown" type="Timer" parent="."]
+wait_time = 0.4
+one_shot = true
+
+[node name="GunSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_kjj4f")
+volume_db = -5.622
+
+[node name="BoostSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_015oj")
+volume_db = -9.369
+pitch_scale = 0.78
+
+[node name="EngineHum" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_vy3cu")
+volume_db = -11.243
+pitch_scale = 0.7
+
+[node name="ImpactSound" type="AudioStreamPlayer2D" parent="."]
+process_mode = 1
+stream = ExtResource("8_ga2kk")
+bus = &"Distort"
+
+[node name="GameOverSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("9_v5wv1")
+pitch_scale = 1.1

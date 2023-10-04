@@ -1,0 +1,75 @@
+[gd_scene load_steps=11 format=3 uid="uid://bb6fy0tt86dyb"]
+
+[ext_resource type="Texture2D" uid="uid://b40gejv1j18nh" path="res://assets/sprites/explosion.png" id="1_2rirf"]
+[ext_resource type="Script" path="res://scripts/explosion.gd" id="2_b1bxf"]
+[ext_resource type="AudioStream" uid="uid://b4725w8p45f04" path="res://assets/sounds/explodemini.wav" id="3_g680q"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i70bo"]
+atlas = ExtResource("1_2rirf")
+region = Rect2(0, 0, 300, 300)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rndo6"]
+atlas = ExtResource("1_2rirf")
+region = Rect2(300, 0, 300, 300)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fjyx1"]
+atlas = ExtResource("1_2rirf")
+region = Rect2(600, 0, 300, 300)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jb8an"]
+atlas = ExtResource("1_2rirf")
+region = Rect2(900, 0, 300, 300)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3or3b"]
+atlas = ExtResource("1_2rirf")
+region = Rect2(1200, 0, 300, 300)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_25jyb"]
+atlas = ExtResource("1_2rirf")
+region = Rect2(1500, 0, 300, 300)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1qtyk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i70bo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rndo6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fjyx1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jb8an")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3or3b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_25jyb")
+}, {
+"duration": 1.2,
+"texture": null
+}],
+"loop": false,
+"name": &"default",
+"speed": 12.0
+}]
+
+[node name="Explosion" type="AnimatedSprite2D"]
+process_mode = 3
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_1qtyk")
+autoplay = "default"
+script = ExtResource("2_b1bxf")
+
+[node name="ExplosionSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_g680q")
+volume_db = -3.748
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+
+[connection signal="animation_finished" from="." to="." method="_on_animation_finished"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

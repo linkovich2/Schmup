@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://073ijcump50i"]
+
+[ext_resource type="Script" path="res://scripts/asteroid.gd" id="1_306oe"]
+[ext_resource type="Texture2D" uid="uid://bnhbw78pj66re" path="res://assets/sprites/sheet.png" id="1_o5ngf"]
+[ext_resource type="AudioStream" uid="uid://l7m4liq0vkwc" path="res://assets/sounds/rock_smash.wav" id="3_a283n"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yefn0"]
+radius = 33.0151
+
+[node name="Asteroid" type="StaticBody2D" groups=["obstacle"]]
+script = ExtResource("1_306oe")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.664063, 0.664063)
+texture = ExtResource("1_o5ngf")
+region_enabled = true
+region_rect = Rect2(327.2, 449.85, 97.8, 99)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 1)
+shape = SubResource("CircleShape2D_yefn0")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_a283n")
+pitch_scale = 0.87
+bus = &"Distort"
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

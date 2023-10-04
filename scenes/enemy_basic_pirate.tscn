@@ -1,0 +1,72 @@
+[gd_scene load_steps=8 format=3 uid="uid://bvgw6u5swjclh"]
+
+[ext_resource type="Script" path="res://scripts/enemy.gd" id="1_t1bf7"]
+[ext_resource type="Shader" path="res://shaders/flash.gdshader" id="2_wbffc"]
+[ext_resource type="Texture2D" uid="uid://bnhbw78pj66re" path="res://assets/sprites/sheet.png" id="3_i3hq3"]
+[ext_resource type="AudioStream" uid="uid://ck6mdwgmq0n3s" path="res://assets/sounds/iceball.wav" id="4_kyjk1"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_21kmr"]
+resource_local_to_scene = true
+shader = ExtResource("2_wbffc")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/flashState = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yda1y"]
+resource_local_to_scene = true
+shader = ExtResource("2_wbffc")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/flashState = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_orvwu"]
+resource_local_to_scene = true
+shader = ExtResource("2_wbffc")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/flashState = 0.0
+
+[node name="EnemyBasicPirate" type="CharacterBody2D" groups=["enemy"]]
+process_mode = 1
+z_index = 2
+script = ExtResource("1_t1bf7")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+visible = false
+rotation = 1.5708
+scale = Vector2(2, 2)
+polygon = PackedVector2Array(-4.00003, -8.49999, -4.00002, -4.49999, -17.5, 6.50006, -13.5, 9.00005, -2, 9, 2, 9, 13.5, 8.99995, 17, 5.99994, 3.99998, -4.50001, 3.99997, -8.50001)
+
+[node name="Wing1" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_21kmr")
+position = Vector2(-4, -16)
+rotation = -0.959931
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_i3hq3")
+region_enabled = true
+region_rect = Rect2(718, 121, 42, 76)
+
+[node name="Wing2" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_yda1y")
+position = Vector2(-4, 16)
+rotation = -2.16421
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_i3hq3")
+flip_h = true
+region_enabled = true
+region_rect = Rect2(718, 121, 42, 76)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_orvwu")
+rotation = -1.5708
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_i3hq3")
+region_enabled = true
+region_rect = Rect2(735.566, 328.396, 41.4343, 71.6038)
+
+[node name="Gunshot" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_kyjk1")
+volume_db = -13.117
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

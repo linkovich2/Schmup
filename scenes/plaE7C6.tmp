@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://ulkipwtqckyj"]
+
+[ext_resource type="Script" path="res://scripts/player.gd" id="1_l60fy"]
+[ext_resource type="Texture2D" uid="uid://bqqniwo6waege" path="res://assets/sprites/player_1.png" id="1_utqdd"]
+
+[node name="Player" type="CharacterBody2D"]
+motion_mode = 1
+script = ExtResource("1_l60fy")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = 1.5708
+scale = Vector2(2, 2)
+texture = ExtResource("1_utqdd")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-11, -23, 0, -6, 21, 0, -2, 8, -11, 25, -16, 5, -23, 3, -23, -3, -16, -5)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(0.8, 0.8)
+position_smoothing_enabled = true
+position_smoothing_speed = 1.0
