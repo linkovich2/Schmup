@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://deon3ltv61a85"]
 
-[ext_resource type="Texture2D" uid="uid://bfrovtyaunqi4" path="res://assets/sprites/spaceShooter2_spritesheet.png" id="1_vx4cd"]
+[ext_resource type="Texture2D" uid="uid://bfrovtyaunqi4" path="res://assets/sprites/sheet_2.png" id="1_2tr8r"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_uenfs"]
 radius = 6.0
@@ -11,7 +11,7 @@ height = 20.0
 [node name="Sprite2D" type="Sprite2D" parent="."]
 rotation = 1.5708
 scale = Vector2(0.6, 0.6)
-texture = ExtResource("1_vx4cd")
+texture = ExtResource("1_2tr8r")
 region_enabled = true
 region_rect = Rect2(1094, 493, 19, 40)
 

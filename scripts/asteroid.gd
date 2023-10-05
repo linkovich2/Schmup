@@ -24,7 +24,7 @@ func collide():
 	damage(20)
 
 func explode():
-	# @todo add explosion, particles, etc.
+	$AudioStreamPlayer2D.play()
 	var a = asteroid_particles.instantiate()
 	a.position = position
 	Game.add_child(a)
@@ -34,7 +34,6 @@ func explode():
 		Game.add_child(s)
 	$Sprite2D.visible = false
 	$CollisionShape2D.set_deferred("disabled", true)
-	$AudioStreamPlayer2D.play()
 	$Timer.start()
 
 func drops():

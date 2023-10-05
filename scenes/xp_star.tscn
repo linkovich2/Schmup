@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://bnhbw78pj66re" path="res://assets/sprites/sheet.png" id="1_bkh1s"]
 [ext_resource type="Script" path="res://scripts/xp_star.gd" id="1_pn6y1"]
-[ext_resource type="AudioStream" uid="uid://cjchra4s6orjb" path="res://assets/sounds/sfx_zap.ogg" id="3_1ylin"]
+[ext_resource type="AudioStream" uid="uid://dkiei2qcr66f6" path="res://assets/sounds/sfx_zap.ogg" id="3_1ylin"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_i0hos"]
 radius = 9.0
